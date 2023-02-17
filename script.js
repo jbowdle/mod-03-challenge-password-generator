@@ -1,17 +1,23 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
+// Random number generator
+const randomNum = function(max) {
+  return Math.floor(Math.random() * max);
+}
+
 let length;
 let lowercase;
 let uppercase;
 let numeric;
 let special;
 
-// Write password to the #password input
-function writePassword() {
-  // var password = generatePassword();
-  var passwordText = document.querySelector("#password");
+const lowercaseList = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+const uppercaseList = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+const numericList = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+const specialList = [" ", "!", '"', "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "~"];
 
+const generatePassword = function() {
   length = Number(window.prompt(`Select password length: 
   (Please enter a numeric value between 8 and 128)`, "8"));
 
@@ -39,12 +45,14 @@ function writePassword() {
     window.alert("The following boxes will ask you what type of characters you want to include in your password. You must select at least one type out of the four.");
     confirmCharacter();
   }
+}
 
-  
+// Write password to the #password input
+function writePassword() {
+  var password = generatePassword();
+  var passwordText = document.querySelector("#password");
 
-  
-
-  // passwordText.value = password;
+  passwordText.value = password;
 
 }
 
