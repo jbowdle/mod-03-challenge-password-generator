@@ -10,3 +10,9 @@ Four prompts will then appear asking which character types that they want to inc
 If none are selected, it will restart and ask the user to select at least one.
 After selection is finished, the password will generate and be visible to the user.
 Clicking on the generate password button will generate a new password, erasing the old one.
+
+## Deployed Application
+https://jbowdle.github.io/mod-03-challenge-password-generator/
+
+## Screenshot
+[Screenshot](./screenshot.png)
