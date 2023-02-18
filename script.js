@@ -6,6 +6,7 @@ const randomNum = function(max) {
   return Math.floor(Math.random() * max);
 }
 
+// Variables to store user choices
 let length;
 let lowercase;
 let uppercase;
@@ -18,6 +19,8 @@ const numericList = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 const specialList = [" ", "!", '"', "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "~"];
 
 const generatePassword = function() {
+  let password = "";
+
   length = Number(window.prompt(`Select password length: 
   (Please enter a numeric value between 8 and 128)`, "8"));
 
@@ -33,6 +36,7 @@ const generatePassword = function() {
       window.alert("You must choose at least one of the four character types to include in your password to continue.");
       confirmCharacter();
     }
+
   }
 
   // Length validation. If failed, will restart the loop. If passed, will move on to have user confirm characters.
@@ -45,6 +49,47 @@ const generatePassword = function() {
     window.alert("The following boxes will ask you what type of characters you want to include in your password. You must select at least one type out of the four.");
     confirmCharacter();
   }
+
+  // This variable will store all options that the user chose together
+  let characterStorage = [];
+
+  // Adds characters to character storage if chosen by user
+  if (lowercase) {
+    for (const character of lowercaseList) {
+      characterStorage += character;
+    }
+  }
+
+  if (uppercase) {
+    for (const character of uppercaseList) {
+      characterStorage += character;
+    }
+  }
+
+  if (numeric) {
+    for (const character of numericList) {
+      characterStorage += character;
+    }
+  }
+
+  if (special) {
+    for (const character of specialList) {
+      characterStorage += character;
+    }
+  }
+
+  // !!!debug
+  console.log(characterStorage);
+
+  // for loop generates password from available characters
+  for (let i = 0; i < length; i++) {
+    const x = randomNum(characterStorage.length);
+    password += characterStorage.slice(x, x + 1);
+    // !!!debug
+    console.log(password);
+  }
+
+  return password;
 }
 
 // Write password to the #password input
