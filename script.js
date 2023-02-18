@@ -1,11 +1,6 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-// Random number generator
-const randomNum = function(max) {
-  return Math.floor(Math.random() * max);
-}
-
 // Variables to store user choices
 let length;
 let lowercase;
@@ -13,14 +8,13 @@ let uppercase;
 let numeric;
 let special;
 
+// Available characters within each set of options
 const lowercaseList = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 const uppercaseList = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 const numericList = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 const specialList = [" ", "!", '"', "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "~"];
 
-const generatePassword = function() {
-  let password = "";
-
+const promptUser = function() {
   length = Number(window.prompt(`Select password length: 
   (Please enter a numeric value between 8 and 128)`, "8"));
 
@@ -36,7 +30,6 @@ const generatePassword = function() {
       window.alert("You must choose at least one of the four character types to include in your password to continue.");
       confirmCharacter();
     }
-
   }
 
   // Length validation. If failed, will restart the loop. If passed, will move on to have user confirm characters.
@@ -49,11 +42,15 @@ const generatePassword = function() {
     window.alert("The following boxes will ask you what type of characters you want to include in your password. You must select at least one type out of the four.");
     confirmCharacter();
   }
+}
 
-  // This variable will store all options that the user chose together
+const generatePassword = function() {
+  promptUser();
+  let password = "";
+
+  // All chosen characters will be put in this array by the subsequent if statements
   let characterStorage = [];
 
-  // Adds characters to character storage if chosen by user
   if (lowercase) {
     for (const character of lowercaseList) {
       characterStorage += character;
@@ -78,15 +75,10 @@ const generatePassword = function() {
     }
   }
 
-  // !!!debug
-  console.log(characterStorage);
-
   // for loop generates password from available characters
   for (let i = 0; i < length; i++) {
-    const x = randomNum(characterStorage.length);
-    password += characterStorage.slice(x, x + 1);
-    // !!!debug
-    console.log(password);
+    const randomNum = Math.floor(Math.random() * characterStorage.length);
+    password += characterStorage.slice(randomNum, randomNum + 1);
   }
 
   return password;
@@ -98,7 +90,6 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
 
 // Add event listener to generate button
